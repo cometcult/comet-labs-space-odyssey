@@ -1,0 +1,7 @@
+parameters:
+#    the_comet_cult_odyssey.example.class: TheCometCult\OdysseyBundle\Example
+
+services:
+#    the_comet_cult_odyssey.example:
+#        class: %the_comet_cult_odyssey.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
