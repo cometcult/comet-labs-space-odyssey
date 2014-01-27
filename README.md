@@ -22,3 +22,12 @@ Vagrant & Puppet
 ----------------
 
 Head over to [The Comet Cult Labs Vagrant Puppet setup](https://github.com/cometcult/vagrant-comet-labs) for instructions
+
+CI
+--
+
+To run Behat scenarios just type:
+
+```bash
+./bin/behat @TheCometCultOdysseyBundle
+```

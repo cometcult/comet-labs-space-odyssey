@@ -1,0 +1,15 @@
+default:
+  context:
+    class:  TheCometCult\OdysseyBundle\Features\Context\FeatureContext
+    parameters:
+      base_url: 'http://localhost'
+  formatter:
+    name: junit, progress
+    parameters:
+      output_path: app/logs/behat,
+      language: en
+  extensions:
+    Behat\Symfony2Extension\Extension:
+      kernel:
+        env: test
+        debug: true
