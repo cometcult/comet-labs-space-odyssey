@@ -3,6 +3,7 @@ Feature: Calculating success rate
     As Mars Travel Agency
     I want to know current success rate
 
+    @wip
     Scenario: Mission landed success rate update
         Given success rate is "100%"
         And there are 1 logs "landed"
@@ -11,6 +12,7 @@ Feature: Calculating success rate
         And status report "landed" is logged
         Then success rate is not updated
 
+    @wip
     Scenario: Mission crashed success rate update
         Given success rate is "100%"
         And there are 1 logs "landed"

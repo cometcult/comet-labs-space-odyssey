@@ -3,6 +3,7 @@ Feature: Sending notifications
     As Mars Travel Agency
     I want to send them automatic email notifications
 
+    @wip
     Scenario: Packing instructions
         When ready to fly crew is created
         Then packing instructions should be sent to all crew members

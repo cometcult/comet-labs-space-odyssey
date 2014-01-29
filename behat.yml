@@ -3,6 +3,8 @@ default:
     class:  TheCometCult\OdysseyBundle\Features\Context\FeatureContext
     parameters:
       base_url: 'http://localhost'
+  filters:
+    tags: "~@wip"
   formatter:
     name: junit, progress
     parameters:
