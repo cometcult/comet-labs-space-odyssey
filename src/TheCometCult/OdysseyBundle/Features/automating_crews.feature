@@ -3,6 +3,7 @@ Feature: Automated crews
     As a travel agency employee
     I want the crews to be automatically cerated
 
+    @wip
     Scenario: Automeated crew creation
         When crew volunteers limit is reached
         Then a ready to fly crew should be created

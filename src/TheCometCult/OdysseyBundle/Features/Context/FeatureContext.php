@@ -46,4 +46,9 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
     {
         $this->kernel = $kernel;
     }
+
+    protected function getContainer()
+    {
+        return $this->kernel->getContainer();
+    }
 }

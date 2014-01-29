@@ -3,6 +3,7 @@ Feature: Starting mission
 	As Mars Travel Agency
 	I want to start Mars mission
 
+	@wip
 	Scenario:
 		Given ready to fly crew exists
 		When misson start time is reached
