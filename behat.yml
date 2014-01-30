@@ -11,7 +11,12 @@ default:
       output_path: app/logs/behat,
       language: en
   extensions:
+    Behat\MinkExtension\Extension:
+        default_session: symfony2
+        goutte: ~
+        browser_name: firefox
     Behat\Symfony2Extension\Extension:
-      kernel:
-        env: test
-        debug: true
+        mink_driver: true
+        kernel:
+          env: test
+          debug: true
