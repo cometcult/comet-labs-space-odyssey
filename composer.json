@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
-        "doctrine/data-fixtures": "1.0.*@dev"
+        "doctrine/data-fixtures": "1.0.*@dev",
+        "behat/mink-extension": "*"
     },
     "scripts": {
         "post-install-cmd": [
@@ -55,6 +56,8 @@
     "require-dev": {
         "behat/behat": "2.5.x-dev",
         "behat/symfony2-extension": "1.1.x-dev",
-        "polishsymfonycommunity/symfony2-mocker-extension": "*"
+        "polishsymfonycommunity/symfony2-mocker-extension": "*",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*"
     }
 }

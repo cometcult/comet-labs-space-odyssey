@@ -2,7 +2,6 @@
 
 namespace TheCometCult\OdysseyBundle\Features\Context;
 
-use Behat\Behat\Context\BehatContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -10,7 +9,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Common\DataFixtures\Purger\MongoDBPurger;
 use Doctrine\Common\DataFixtures\Executor\MongoDBExecutor;
 
-class FeatureContext extends BehatContext implements KernelAwareInterface
+use Behat\MinkExtension\Context\RawMinkContext;
+
+class FeatureContext extends RawMinkContext implements KernelAwareInterface
 {
     /**
      * @var KernelInterface
@@ -36,7 +37,7 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
      */
     public function __construct(array $parameters)
     {
-
+        $this->useContext('volunteer', new VolunteerContext());
     }
 
     /**
@@ -47,7 +48,10 @@ class FeatureContext extends BehatContext implements KernelAwareInterface
         $this->kernel = $kernel;
     }
 
-    protected function getContainer()
+    /**
+     * @return \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    public function getContainer()
     {
         return $this->kernel->getContainer();
     }
