@@ -6,10 +6,7 @@ default:
   filters:
     tags: "~@wip"
   formatter:
-    name: junit, progress
-    parameters:
-      output_path: app/logs/behat,
-      language: en
+    name: pretty
   extensions:
     Behat\MinkExtension\Extension:
         default_session: symfony2

@@ -58,6 +58,7 @@
         "behat/symfony2-extension": "1.1.x-dev",
         "polishsymfonycommunity/symfony2-mocker-extension": "*",
         "behat/mink-extension": "*",
-        "behat/mink-goutte-driver": "*"
+        "behat/mink-goutte-driver": "*",
+        "phpspec/phpspec": "dev-master"
     }
 }

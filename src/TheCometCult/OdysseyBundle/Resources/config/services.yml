@@ -2,6 +2,27 @@ parameters:
 #    the_comet_cult_odyssey.example.class: TheCometCult\OdysseyBundle\Example
 
 services:
-#    the_comet_cult_odyssey.example:
-#        class: %the_comet_cult_odyssey.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    the_comet_cult_odyssey.document_manager:
+        class: Doctrine\ODM\MongoDB\DocumentManager
+        factory_service: doctrine_mongodb
+        factory_method: getManager
+        public: false
+    the_comet_cult_odyssey.volunteer_repository:
+        class: TheCometCult\OdysseyBundle\Repository\VolunteerRepository
+        factory_service: doctrine_mongodb
+        factory_method: getRepository
+        arguments:
+            - "TheCometCultOdysseyBundle:Volunteer"
+    the_comet_cult_odyssey.crew_manager:
+        class: TheCometCult\OdysseyBundle\Manager\CrewManager
+        arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.volunteer_repository", "%the_comet_cult_odyssey.crew_size%", "@the_comet_cult_odyssey.mission_manager"]
+    the_comet_cult_odyssey.mission_manager:
+        class: TheCometCult\OdysseyBundle\Manager\MissionManager
+        arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.time_manager"]
+    the_comet_cult_odyssey.time_manager:
+        class: TheCometCult\OdysseyBundle\Manager\TimeManager
+    the_comet_cult_odyssey.crew_manager_listener:
+        class: TheCometCult\OdysseyBundle\EventListener\Manager\CrewManagerListener
+        arguments: ["@the_comet_cult_odyssey.crew_manager"]
+        tags:
+            - { name: kernel.event_listener, event: volunteer.volunteer_registered, method: onVolunteerRegistered }
