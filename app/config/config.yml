@@ -24,6 +24,9 @@ framework:
     fragments:       ~
     http_method_override: true
 
+the_comet_cult_odyssey:
+    crew_size: 5
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"

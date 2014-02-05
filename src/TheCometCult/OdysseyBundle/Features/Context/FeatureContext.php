@@ -38,6 +38,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     public function __construct(array $parameters)
     {
         $this->useContext('volunteer', new VolunteerContext());
+        $this->useContext('crew', new CrewContext());
+        $this->useContext('mission', new MissionContext());
     }
 
     /**

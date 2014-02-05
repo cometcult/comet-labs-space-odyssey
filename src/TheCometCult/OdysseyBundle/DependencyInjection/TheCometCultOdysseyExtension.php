@@ -21,7 +21,9 @@ class TheCometCultOdysseyExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        if (isset($config['crew_size'])) {
+            $container->setParameter('the_comet_cult_odyssey.crew_size', $config['crew_size']);
+        }
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
