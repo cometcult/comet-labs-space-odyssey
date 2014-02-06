@@ -1,5 +1,7 @@
 parameters:
-#    the_comet_cult_odyssey.example.class: TheCometCult\OdysseyBundle\Example
+    the_comet_cult_odyssey.mailer.config:
+        crew.packing_instructions.template: TheCometCultOdysseyBundle:Mailer:crew_packing_instructions.email.twig
+        from_email: 'no-reply@test.com'
 
 services:
     the_comet_cult_odyssey.document_manager:
@@ -7,6 +9,8 @@ services:
         factory_service: doctrine_mongodb
         factory_method: getManager
         public: false
+    the_comet_cult_odyssey.mailer.message_factory:
+        class: TheCometCult\OdysseyBundle\Mailer\MessageFactory
     the_comet_cult_odyssey.volunteer_repository:
         class: TheCometCult\OdysseyBundle\Repository\VolunteerRepository
         factory_service: doctrine_mongodb
@@ -15,7 +19,7 @@ services:
             - "TheCometCultOdysseyBundle:Volunteer"
     the_comet_cult_odyssey.crew_manager:
         class: TheCometCult\OdysseyBundle\Manager\CrewManager
-        arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.volunteer_repository", "%the_comet_cult_odyssey.crew_size%", "@the_comet_cult_odyssey.mission_manager"]
+        arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.volunteer_repository", "%the_comet_cult_odyssey.crew_size%", "@event_dispatcher"]
     the_comet_cult_odyssey.mission_manager:
         class: TheCometCult\OdysseyBundle\Manager\MissionManager
         arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.time_manager"]
@@ -26,3 +30,20 @@ services:
         arguments: ["@the_comet_cult_odyssey.crew_manager"]
         tags:
             - { name: kernel.event_listener, event: volunteer.volunteer_registered, method: onVolunteerRegistered }
+    the_comet_cult_odyssey.mission_manager_listener:
+        class: TheCometCult\OdysseyBundle\EventListener\Manager\MissionManagerListener
+        arguments: ["@the_comet_cult_odyssey.mission_manager"]
+        tags:
+            - { name: kernel.event_listener, event: crew.crew_created, method: onCrewCreated }
+    the_comet_cult_odyssey.notification_mailer:
+        class: TheCometCult\OdysseyBundle\Mailer\NotificationMailer
+        arguments: ["@mailer"]
+        calls:
+            - [setMessageFactory, ["@the_comet_cult_odyssey.mailer.message_factory"]]
+            - [setParameters, ["%the_comet_cult_odyssey.mailer.config%"]]
+            - [setTemplating, ["@templating"]]
+    the_comet_cult_odyssey.notification_listner:
+        class: TheCometCult\OdysseyBundle\EventListener\Mailer\NotificationListner
+        arguments: ["@the_comet_cult_odyssey.notification_mailer"]
+        tags:
+            - { name: kernel.event_listener, event: crew.crew_created, method: onCrewCreated }

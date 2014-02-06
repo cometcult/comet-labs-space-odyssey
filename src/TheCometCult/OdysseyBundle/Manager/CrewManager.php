@@ -7,7 +7,10 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use TheCometCult\OdysseyBundle\Document\Volunteer;
 use TheCometCult\OdysseyBundle\Document\Crew;
 use TheCometCult\OdysseyBundle\Repository\VolunteerRepository;
-use TheCometCult\OdysseyBundle\Manager\MissionManagerInterface;
+use TheCometCult\OdysseyBundle\Event\CrewCreatedEvent;
+use TheCometCult\OdysseyBundle\CrewEvents;
+
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 use Exception;
 
@@ -31,22 +34,27 @@ class CrewManager implements CrewManagerInterface
     protected $crewSizeLimit;
 
     /**
-     * @var MissionManagerInterface
+     * @var EventDispatcherInterface
      */
-    protected $missionManager;
+    protected $dispatcher;
 
     /**
-     * @param DocumentManager         $dm
-     * @param VolunteerRepository     $volunteerRepository
-     * @param int                     $crewSizeLimit
-     * @param MissionManagerInterface $missionManager
+     * @param DocumentManager           $dm
+     * @param VolunteerRepository       $volunteerRepository
+     * @param int                       $crewSizeLimit
+     * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(DocumentManager $dm, VolunteerRepository $volunteerRepository, $crewSizeLimit, MissionManagerInterface $missionManager)
+    public function __construct(
+        DocumentManager $dm,
+        VolunteerRepository $volunteerRepository,
+        $crewSizeLimit,
+        EventDispatcherInterface $dispatcher
+    )
     {
         $this->dm = $dm;
         $this->volunteerRepository = $volunteerRepository;
         $this->crewSizeLimit = $crewSizeLimit;
-        $this->missionManager = $missionManager;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -77,7 +85,10 @@ class CrewManager implements CrewManagerInterface
         $this->dm->persist($crew);
         $this->dm->flush();
 
-        $this->missionManager->createMission();
+        $this->dispatcher->dispatch(
+            CrewEvents::EVENT_CREW_CREATED,
+            new CrewCreatedEvent($crew)
+        );
 
         return $crew;
     }

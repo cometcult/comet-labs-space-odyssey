@@ -18,6 +18,7 @@ before_script:
 
 script:
     - bin/behat @TheCometCultOdysseyBundle
+    - bin/phpspec run
 notifications:
     email:
         - ks@thecometcult.com
