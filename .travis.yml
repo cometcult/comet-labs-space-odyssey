@@ -1,7 +1,6 @@
 language: php
 
 php:
-    - 5.3
     - 5.4
     - 5.5
 
@@ -18,6 +17,7 @@ before_script:
 
 script:
     - bin/behat @TheCometCultOdysseyBundle
+    - bin/phpspec run
 notifications:
     email:
         - ks@thecometcult.com

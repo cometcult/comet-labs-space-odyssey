@@ -12,7 +12,7 @@ final class VolunteerEvents
      * a volunteer is registered
      *
      * The event listener receives an
-     * TheCometCult\OdysseyBundle\Event\Controller\VolunteerRegisteredEvent
+     * TheCometCult\OdysseyBundle\Event\VolunteerRegisteredEvent
      *
      * @var string
      */
