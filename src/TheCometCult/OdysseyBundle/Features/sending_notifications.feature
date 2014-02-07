@@ -10,32 +10,33 @@ Feature: Sending notifications
         | volunteer2@test.com |
         | volunteer3@test.com |
         | volunteer4@test.com |
+        And content of email with packing instructions sent to "volunteer1@test.com" should be:
+            """
+            Crew packing instructions
+            Hi. Please pack your socks.
+            """
+        And content of email with packing instructions sent to "volunteer2@test.com" should be:
+            """
+            Crew packing instructions
+            Hi. Please pack your socks.
+            """
+        And content of email with packing instructions sent to "volunteer3@test.com" should be:
+            """
+            Crew packing instructions
+            Hi. Please pack your socks.
+            """
+        And content of email with packing instructions sent to "volunteer4@test.com" should be:
+            """
+            Crew packing instructions
+            Hi. Please pack your socks.
+            """
+        And content of email with packing instructions sent to "volunteer5@test.com" should be:
+            """
+            Crew packing instructions
+            Hi. Please pack your socks.
+            """
 
     Scenario: Packing instructions
         Given I am on homepage
-        And EMAIL SENDER expects to send mail to "volunteer1@test.com" with:
-            """
-            Crew packing instructions
-            Hi. Please pack your socks.
-            """
-        And EMAIL SENDER expects to send mail to "volunteer2@test.com" with:
-            """
-            Crew packing instructions
-            Hi. Please pack your socks.
-            """
-        And EMAIL SENDER expects to send mail to "volunteer3@test.com" with:
-            """
-            Crew packing instructions
-            Hi. Please pack your socks.
-            """
-        And EMAIL SENDER expects to send mail to "volunteer4@test.com" with:
-            """
-            Crew packing instructions
-            Hi. Please pack your socks.
-            """
-        And EMAIL SENDER expects to send mail to "volunteer5@test.com" with:
-            """
-            Crew packing instructions
-            Hi. Please pack your socks.
-            """
         When I apply with "volunteer5@test.com" email
+        Then all crew members should recieve email with packing instructions

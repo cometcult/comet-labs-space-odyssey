@@ -34,21 +34,28 @@ class MessageContext extends BehatContext implements KernelAwareInterface
 
     /**
      * @AfterScenario
-     *
-     * @return null
      */
-    public function verifyPendingExpectations()
+    public function verifyUnmockedServices()
     {
         foreach ($this->kernel->getContainer()->getMockedServices() as $id => $service) {
-            $this->kernel->getContainer()->unmock($id);
+            throw new BehaviorException('You forgot to unmock service: ' . $id);
         }
+    }
+
+    /**
+     * @Then /^all crew members should recieve email with packing instructions$/
+     */
+    public function allCrewMembersShouldRecievePackingInstructions()
+    {
+        $this->kernel->getContainer()->unmock('the_comet_cult_odyssey.mailer.message_factory');
+        $this->kernel->getContainer()->unmock('swiftmailer.mailer.default');
         Mockery::close();
     }
 
     /**
-     * @Given /^EMAIL SENDER expects to send mail to "([^"]*)" with:$/
+     * @Given /^content of email with packing instructions sent to "([^"]*)" should be:$/
      */
-    public function emailSenderExpectsToSendMailToWith($toEmail, PyStringNode $content)
+    public function contentOfEmailWithPackingInstructionsSentToShouldBe($toEmail, PyStringNode $content)
     {
         $message = Swift_Message::newInstance()
             ->setSubject('subject')
