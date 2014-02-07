@@ -5,6 +5,18 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+    /**
+     * @return string
+     */
+    protected function getContainerBaseClass()
+    {
+        if ('test' == $this->environment) {
+            return '\PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer';
+        }
+
+        return parent::getContainerBaseClass();
+    }
+
     public function registerBundles()
     {
         $bundles = array(

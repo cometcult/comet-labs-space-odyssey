@@ -15,11 +15,11 @@ class CrewManagerSpec extends ObjectBehavior
     /**
      * @param Doctrine\ODM\MongoDB\DocumentManager $dm
      * @param TheCometCult\OdysseyBundle\Repository\VolunteerRepository $volunteerRepository
-     * @param TheCometCult\OdysseyBundle\Manager\MissionManager $missionManager
+     * @param Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
      */
-    function let($dm, $volunteerRepository, $missionManager)
+    function let($dm, $volunteerRepository, $dispatcher)
     {
-        $this->beConstructedWith($dm, $volunteerRepository, 5, $missionManager);
+        $this->beConstructedWith($dm, $volunteerRepository, 5, $dispatcher);
     }
 
     function it_is_initializable()

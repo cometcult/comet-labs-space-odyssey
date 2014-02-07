@@ -40,6 +40,7 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
         $this->useContext('volunteer', new VolunteerContext());
         $this->useContext('crew', new CrewContext());
         $this->useContext('mission', new MissionContext());
+        $this->useContext('message', new MessageContext());
     }
 
     /**
