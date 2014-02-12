@@ -23,6 +23,11 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->integerNode('crew_size')->defaultValue(5)->end()
+                ->arrayNode('time')
+                    ->children()
+                        ->integerNode('departure_delay')->defaultValue(24*60)->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

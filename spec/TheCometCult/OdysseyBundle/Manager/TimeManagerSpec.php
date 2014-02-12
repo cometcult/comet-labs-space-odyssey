@@ -14,6 +14,11 @@ class TimeManagerSpec extends ObjectBehavior
 
     function it_should_return_time()
     {
-        $this->getTime()->shouldNotReturn(null);
+        $this->getTime()->shouldBeInteger();
+    }
+
+    function it_should_generate_departure_time()
+    {
+        $this->generateDepartureTime()->shouldBeInteger();
     }
 }

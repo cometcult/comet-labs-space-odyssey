@@ -3,8 +3,9 @@ Feature: Starting mission
 	As Mars Travel Agency
 	I want to start Mars mission
 
-	@wip
 	Scenario:
-		Given ready to fly crew exists
-		When misson start time is reached
-		Then mission starts
+		Given a ready to fly crew exists
+		And crew's next misson start time is reached
+		When the mission starting routine is run
+		Then the mission is started
+		And the crew is flying

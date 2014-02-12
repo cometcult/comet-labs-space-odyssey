@@ -5,6 +5,7 @@ namespace TheCometCult\OdysseyBundle\Manager;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 use TheCometCult\OdysseyBundle\Document\Mission;
+use TheCometCult\OdysseyBundle\Document\Crew;
 use TheCometCult\OdysseyBundle\Manager\TimeManagerInterface;
 
 class MissionManager implements MissionManagerInterface
@@ -30,16 +31,35 @@ class MissionManager implements MissionManagerInterface
     }
 
     /**
-     * @return Mission
+     * {@inheritdoc}
      */
     public function createMission()
     {
-        $mission = new Mission();
         $timestamp = $this->timeManager->getTime();
+        $departureTime = $this->timeManager->generateDepartureTime();
+
+        $mission = new Mission();
         $mission->setCreatedAt($timestamp);
+        $mission->setDepartedAt($departureTime);
+
         $this->dm->persist($mission);
         $this->dm->flush();
 
         return $mission;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function startMission(Mission $mission)
+    {
+        $mission->setStatus(Mission::STATUS_MISSION_ONGOING);
+
+        $crew = $mission->getCrew();
+        $crew->setStatus(Crew::STATUS_FLYING);
+
+        $this->dm->persist($mission);
+        $this->dm->persist($crew);
+        $this->dm->flush();
     }
 }

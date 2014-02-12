@@ -25,6 +25,8 @@ services:
         arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.time_manager"]
     the_comet_cult_odyssey.time_manager:
         class: TheCometCult\OdysseyBundle\Manager\TimeManager
+        calls:
+            - [setDepartureDelay, ["%the_comet_cult_odyssey.time.departure_delay%"]]
     the_comet_cult_odyssey.crew_manager_listener:
         class: TheCometCult\OdysseyBundle\EventListener\Manager\CrewManagerListener
         arguments: ["@the_comet_cult_odyssey.crew_manager"]
