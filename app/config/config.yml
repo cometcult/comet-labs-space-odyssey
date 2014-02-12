@@ -26,6 +26,8 @@ framework:
 
 the_comet_cult_odyssey:
     crew_size: 5
+    time:
+        departure_delay: 1440
 
 # Twig Configuration
 twig:

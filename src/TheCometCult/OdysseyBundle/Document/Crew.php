@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use TheCometCult\OdysseyBundle\Document\Volunteer;
-
 /**
  * @MongoDB\Document
  */
@@ -18,6 +16,11 @@ class Crew
      * @const STATUS_READY_TO_FLY crew is ready to fly
      */
     const STATUS_READY_TO_FLY = 'ready_to_fly';
+
+    /**
+     * @const STATUS_FLYING crew is currently flying
+     */
+    const STATUS_FLYING = 'flying';
 
     /**
      * @MongoDB\Id(strategy="auto")

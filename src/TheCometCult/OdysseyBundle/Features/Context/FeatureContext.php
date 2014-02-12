@@ -49,6 +49,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+
+        $this->useContext('command', new CommandContext($kernel));
     }
 
     /**

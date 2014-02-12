@@ -24,6 +24,10 @@ class TheCometCultOdysseyExtension extends Extension
         if (isset($config['crew_size'])) {
             $container->setParameter('the_comet_cult_odyssey.crew_size', $config['crew_size']);
         }
+        if (isset($config['time']['departure_delay'])) {
+            $container->setParameter('the_comet_cult_odyssey.time.departure_delay', $config['time']['departure_delay']);
+        }
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
