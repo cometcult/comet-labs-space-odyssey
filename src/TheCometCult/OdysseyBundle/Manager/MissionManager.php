@@ -8,6 +8,7 @@ use TheCometCult\OdysseyBundle\Document\Mission;
 use TheCometCult\OdysseyBundle\Document\Crew;
 use TheCometCult\OdysseyBundle\Manager\TimeManagerInterface;
 use TheCometCult\OdysseyBundle\Mission\Checker\HoustonInterface;
+use TheCometCult\OdysseyBundle\Logger\MissionLoggerInterface;
 
 class MissionManager implements MissionManagerInterface
 {
@@ -27,6 +28,11 @@ class MissionManager implements MissionManagerInterface
     protected $houston;
 
     /**
+     * @var MissionLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param DocumentManager      $dm
      * @param TimeManagerInterface $timeManager
      * @param HoustonInterface      $houston
@@ -36,6 +42,14 @@ class MissionManager implements MissionManagerInterface
         $this->dm = $dm;
         $this->timeManager = $timeManager;
         $this->houston = $houston;
+    }
+
+    /**
+     * @param MissionLoggerInterface $logger
+     */
+    public function setLogger(MissionLoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 
     /**
@@ -89,12 +103,14 @@ class MissionManager implements MissionManagerInterface
                 $mission->setFinished(true);
                 $this->dm->persist($mission);
                 $this->dm->flush();
+                $this->logger->logFinishedMission(Mission::STATUS_MISSION_LANDED);
                 break;
             case HoustonInterface::MISSION_CRASHED:
                 $mission->setStatus(Mission::STATUS_MISSION_CRASHED);
                 $mission->setFinished(true);
                 $this->dm->persist($mission);
                 $this->dm->flush();
+                $this->logger->logFinishedMission(Mission::STATUS_MISSION_CRASHED);
                 break;
         }
 

@@ -15,10 +15,12 @@ class MissionManagerSpec extends ObjectBehavior
      * @param Doctrine\ODM\MongoDB\DocumentManager $dm
      * @param TheCometCult\OdysseyBundle\Manager\TimeManagerInterface $timeManeger
      * @param TheCometCult\OdysseyBundle\Mission\Checker\HoustonInterface $houston
+     * @param TheCometCult\OdysseyBundle\Logger\MissionLoggerInterface $logger
      */
-    function let($dm, $timeManeger, $houston)
+    function let($dm, $timeManeger, $houston, $logger)
     {
         $this->beConstructedWith($dm, $timeManeger, $houston);
+        $this->setLogger($logger);
     }
 
     function it_is_initializable()
@@ -68,12 +70,14 @@ class MissionManagerSpec extends ObjectBehavior
      * @param Doctrine\ODM\MongoDB\DocumentManager $dm
      * @param TheCometCult\OdysseyBundle\Document\Mission $mission
      * @param TheCometCult\OdysseyBundle\Mission\Checker\HoustonInterface $houston
+     * @param TheCometCult\OdysseyBundle\Logger\MissionLoggerInterface $logger
      */
-    function it_should_update_mission_status_to_landed($dm, $mission, $houston)
+    function it_should_update_mission_status_to_landed($dm, $mission, $houston, $logger)
     {
         $houston->getMissionStatus($mission)->willReturn(HoustonInterface::MISSION_LANDED);
         $mission->setStatus(Mission::STATUS_MISSION_LANDED)->shouldBeCalled();
         $mission->setFinished(true)->shouldBeCalled();
+        $logger->logFinishedMission(Mission::STATUS_MISSION_LANDED)->shouldBeCalled();
         $dm->persist($mission)->shouldBeCalled();
         $dm->flush()->shouldBeCalled();
         $this->updateMissionStatus($mission)->shouldHaveType('TheCometCult\OdysseyBundle\Document\Mission');
@@ -83,12 +87,14 @@ class MissionManagerSpec extends ObjectBehavior
      * @param Doctrine\ODM\MongoDB\DocumentManager $dm
      * @param TheCometCult\OdysseyBundle\Document\Mission $mission
      * @param TheCometCult\OdysseyBundle\Mission\Checker\HoustonInterface $houston
+     * @param TheCometCult\OdysseyBundle\Logger\MissionLoggerInterface $logger
      */
-    function it_should_update_mission_status_to_crashed($dm, $mission, $houston)
+    function it_should_update_mission_status_to_crashed($dm, $mission, $houston, $logger)
     {
         $houston->getMissionStatus($mission)->willReturn(HoustonInterface::MISSION_CRASHED);
         $mission->setStatus(Mission::STATUS_MISSION_CRASHED)->shouldBeCalled();
         $mission->setFinished(true)->shouldBeCalled();
+        $logger->logFinishedMission(Mission::STATUS_MISSION_CRASHED)->shouldBeCalled();
         $dm->persist($mission)->shouldBeCalled();
         $dm->flush()->shouldBeCalled();
         $this->updateMissionStatus($mission)->shouldHaveType('TheCometCult\OdysseyBundle\Document\Mission');
@@ -98,7 +104,7 @@ class MissionManagerSpec extends ObjectBehavior
      * @param TheCometCult\OdysseyBundle\Document\Mission $mission
      * @param TheCometCult\OdysseyBundle\Mission\Checker\HoustonInterface $houston
      */
-    function it_should_update_mission_status_to_ongoing($dm, $mission, $houston)
+    function it_should_update_mission_status_to_ongoing($mission, $houston)
     {
         $houston->getMissionStatus($mission)->willReturn(null);
         $mission->setStatus(Argument::any())->shouldNotBeCalled();

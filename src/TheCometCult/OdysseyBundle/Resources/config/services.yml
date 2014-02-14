@@ -23,9 +23,14 @@ services:
     the_comet_cult_odyssey.mission_manager:
         class: TheCometCult\OdysseyBundle\Manager\MissionManager
         arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.time_manager", "@the_comet_cult_odyssey.houston"]
+        calls:
+            - [setLogger, ["@the_comet_cult_odyssey.logger"]]
     the_comet_cult_odyssey.houston:
         class: TheCometCult\OdysseyBundle\Mission\Checker\FoursquareChecker
         arguments: ["@foursquare_foursquare_api.checkin_manager"]
+    the_comet_cult_odyssey.logger:
+        class: TheCometCult\OdysseyBundle\Logger\MissionLogger
+        arguments: ["@the_comet_cult_odyssey.document_manager"]
     the_comet_cult_odyssey.time_manager:
         class: TheCometCult\OdysseyBundle\Manager\TimeManager
         calls:
