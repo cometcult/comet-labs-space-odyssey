@@ -22,11 +22,15 @@ services:
         arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.volunteer_repository", "%the_comet_cult_odyssey.crew_size%", "@event_dispatcher"]
     the_comet_cult_odyssey.mission_manager:
         class: TheCometCult\OdysseyBundle\Manager\MissionManager
-        arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.time_manager"]
+        arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.time_manager", "@the_comet_cult_odyssey.houston"]
+    the_comet_cult_odyssey.houston:
+        class: TheCometCult\OdysseyBundle\Mission\Checker\FoursquareChecker
+        arguments: ["@foursquare_foursquare_api.checkin_manager"]
     the_comet_cult_odyssey.time_manager:
         class: TheCometCult\OdysseyBundle\Manager\TimeManager
         calls:
             - [setDepartureDelay, ["%the_comet_cult_odyssey.time.departure_delay%"]]
+            - [setMissionEta, ["%the_comet_cult_odyssey.time.mission_eta%"]]
     the_comet_cult_odyssey.crew_manager_listener:
         class: TheCometCult\OdysseyBundle\EventListener\Manager\CrewManagerListener
         arguments: ["@the_comet_cult_odyssey.crew_manager"]

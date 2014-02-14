@@ -49,9 +49,9 @@ class CrewContext extends BehatContext
     }
 
     /**
-     * @Given /^the crew is flying$/
+     * @Given /^the crew should be flying$/
      */
-    public function theCrewIsFlying()
+    public function theCrewShouldBeFlying()
     {
         $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
         $flyingCrewsNumber = $dm->createQueryBuilder('TheCometCultOdysseyBundle:Crew')

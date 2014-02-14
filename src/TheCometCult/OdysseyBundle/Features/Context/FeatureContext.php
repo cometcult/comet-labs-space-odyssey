@@ -3,13 +3,15 @@
 namespace TheCometCult\OdysseyBundle\Features\Context;
 
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Behat\Exception\BehaviorException;
+use Behat\MinkExtension\Context\RawMinkContext;
 
 use Symfony\Component\HttpKernel\KernelInterface;
 
 use Doctrine\Common\DataFixtures\Purger\MongoDBPurger;
 use Doctrine\Common\DataFixtures\Executor\MongoDBExecutor;
 
-use Behat\MinkExtension\Context\RawMinkContext;
+use Mockery;
 
 class FeatureContext extends RawMinkContext implements KernelAwareInterface
 {
@@ -30,6 +32,17 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     }
 
     /**
+     * @AfterScenario
+     */
+    public function verifyUnmockedServices()
+    {
+        foreach ($this->kernel->getContainer()->getMockedServices() as $id => $service) {
+            $this->kernel->getContainer()->unmock($id);
+        }
+        Mockery::close();
+    }
+
+    /**
      * Initializes context.
      * Every scenario gets it's own context object.
      *
@@ -41,6 +54,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
         $this->useContext('crew', new CrewContext());
         $this->useContext('mission', new MissionContext());
         $this->useContext('message', new MessageContext());
+        $this->useContext('time', new TimeContext());
+        $this->useContext('houston', new HoustonContext());
     }
 
     /**

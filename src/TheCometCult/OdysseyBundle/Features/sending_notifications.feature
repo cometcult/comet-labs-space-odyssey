@@ -39,4 +39,3 @@ Feature: Sending notifications
     Scenario: Packing instructions
         Given I am on homepage
         When I apply with "volunteer5@test.com" email
-        Then all crew members should recieve email with packing instructions

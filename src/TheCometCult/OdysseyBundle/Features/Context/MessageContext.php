@@ -33,26 +33,6 @@ class MessageContext extends BehatContext implements KernelAwareInterface
     }
 
     /**
-     * @AfterScenario
-     */
-    public function verifyUnmockedServices()
-    {
-        foreach ($this->kernel->getContainer()->getMockedServices() as $id => $service) {
-            throw new BehaviorException('You forgot to unmock service: ' . $id);
-        }
-    }
-
-    /**
-     * @Then /^all crew members should recieve email with packing instructions$/
-     */
-    public function allCrewMembersShouldRecievePackingInstructions()
-    {
-        $this->kernel->getContainer()->unmock('the_comet_cult_odyssey.mailer.message_factory');
-        $this->kernel->getContainer()->unmock('swiftmailer.mailer.default');
-        Mockery::close();
-    }
-
-    /**
      * @Given /^content of email with packing instructions sent to "([^"]*)" should be:$/
      */
     public function contentOfEmailWithPackingInstructionsSentToShouldBe($toEmail, PyStringNode $content)
@@ -79,10 +59,5 @@ class MessageContext extends BehatContext implements KernelAwareInterface
             ->with($message)
             ->once()
             ->andReturn(true);
-    }
-
-    protected function getContainer()
-    {
-        return $this->getMainContext()->getContainer();
     }
 }

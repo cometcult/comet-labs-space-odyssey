@@ -28,6 +28,7 @@ class MissionManagerListener
      */
     public function onCrewCreated(CrewCreatedEvent $crewCreatedEvent)
     {
-        $this->missionManager->createMission();
+        $crew = $crewCreatedEvent->getCrew();
+        $this->missionManager->createMission($crew);
     }
 }

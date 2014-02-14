@@ -1,6 +1,6 @@
 <?php
 
-namespace TheCometCult\OdysseyBundle\DependencyInjection;
+namespace Foursquare\FoursquareAPIBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,18 +18,11 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('the_comet_cult_odyssey');
+        $rootNode = $treeBuilder->root('foursquare_foursquare_api');
 
-        $rootNode
-            ->children()
-                ->integerNode('crew_size')->defaultValue(5)->end()
-                ->arrayNode('time')
-                    ->children()
-                        ->integerNode('departure_delay')->defaultValue(24*60)->end()
-                        ->integerNode('mission_eta')->defaultValue(72*60)->end()
-                    ->end()
-                ->end()
-            ->end();
+        // Here you should define the parameters that are allowed to
+        // configure your bundle. See the documentation linked above for
+        // more information on that topic.
 
         return $treeBuilder;
     }

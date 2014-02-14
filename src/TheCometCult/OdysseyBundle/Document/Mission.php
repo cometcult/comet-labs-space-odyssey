@@ -22,6 +22,16 @@ class Mission
     const STATUS_MISSION_ONGOING = 'mission_ongoing';
 
     /**
+     * @const STATUS_MISSION_LANDED mission landed
+     */
+    const STATUS_MISSION_LANDED = 'mission_landed';
+
+    /**
+     * @const STATUS_MISSION_CRASHED mission has crashed
+     */
+    const STATUS_MISSION_CRASHED = 'mission_crashed';
+
+    /**
      * @MongoDB\Id(strategy="auto")
      */
     protected $id;
@@ -42,9 +52,19 @@ class Mission
     protected $departedAt;
 
     /**
+     * @MongoDB\Date
+     */
+    protected $eta;
+
+    /**
      * @MongoDB\ReferenceOne(targetDocument="TheCometCult\OdysseyBundle\Document\Crew")
      */
     protected $crew;
+
+    /**
+     * @MongoDB\Boolean
+     */
+    protected $finished;
 
     public function __construct()
     {
@@ -108,10 +128,42 @@ class Mission
     }
 
     /**
+     * @param int
+     */
+    public function setEta($timestamp)
+    {
+        $this->eta = new \DateTime(date('Y-m-d H:i:s', $timestamp));
+    }
+
+    /**
+     * @return int
+     */
+    public function getEtaTimestamp()
+    {
+        return $this->eta->getTimestamp();
+    }
+
+    /**
      * @return Crew
      */
     public function getCrew()
     {
         return $this->crew;
+    }
+
+    /**
+     * @param bool $finished
+     */
+    public function setFinished($finished)
+    {
+        $this->finished = $finished;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFinished()
+    {
+        return $this->finished;
     }
 }

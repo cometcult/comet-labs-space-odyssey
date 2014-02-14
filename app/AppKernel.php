@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new TheCometCult\OdysseyBundle\TheCometCultOdysseyBundle(),
+            new Foursquare\FoursquareAPIBundle\FoursquareFoursquareAPIBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
