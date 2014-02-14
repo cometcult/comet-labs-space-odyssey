@@ -1,0 +1,3 @@
+services:
+   foursquare_foursquare_api.checkin_manager:
+       class: Foursquare\FoursquareAPIBundle\Manager\CheckinManager

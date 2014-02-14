@@ -28,6 +28,7 @@ the_comet_cult_odyssey:
     crew_size: 5
     time:
         departure_delay: 1440
+        mission_eta: 4320
 
 # Twig Configuration
 twig:

@@ -4,7 +4,15 @@ namespace TheCometCult\OdysseyBundle\Manager;
 
 class TimeManager implements TimeManagerInterface
 {
+    /**
+     * @var int
+     */
     protected $departureDelay;
+
+    /**
+     * @var int
+     */
+    protected $missionEta;
 
     /**
      * @param int $departureDelay
@@ -12,6 +20,22 @@ class TimeManager implements TimeManagerInterface
     public function setDepartureDelay($departureDelay)
     {
         $this->departureDelay = $departureDelay;
+    }
+
+    /**
+     * @param int $missonEta
+     */
+    public function setMissionEta($missonEta)
+    {
+        $this->missionEta = $missonEta;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDepartureDelay()
+    {
+        return $this->departureDelay;
     }
 
     /**
@@ -28,5 +52,13 @@ class TimeManager implements TimeManagerInterface
     public function generateDepartureTime()
     {
         return time() + $this->departureDelay;
+    }
+
+    /**
+     * @return int
+     */
+    public function generateMissionEta()
+    {
+        return time() + $this->missionEta;
     }
 }
