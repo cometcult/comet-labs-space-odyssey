@@ -56,6 +56,7 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
         $this->useContext('message', new MessageContext());
         $this->useContext('time', new TimeContext());
         $this->useContext('houston', new HoustonContext());
+        $this->useContext('log', new LogContext());
     }
 
     /**
