@@ -6,9 +6,17 @@ Welcome to The Comet Cult labs training Symfony application.
 Vagrant & Puppet
 ----------------
 
-Head over to [The Comet Cult Labs Vagrant Puppet setup](https://github.com/cometcult/vagrant-comet-labs) for instructions
+To get the Vagrant machine running just type:
 
-Everything below is done on the virtual machine environment so make sure you logged into it with `vagrant ssh`
+```bash
+vagrant up --provision
+```
+
+Then login to the machine with:
+
+```bash
+vagrant ssh
+```
 
 Installing vendors
 ------------------
@@ -16,7 +24,7 @@ Installing vendors
 Head over to the project's directory
 
 ```bash
-cd /srv/comet-labs.dev/
+cd /var/www/comet-labs.dev/
 ```
 
 Download composer with:
