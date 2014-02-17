@@ -9,6 +9,4 @@
 /vendor/
 /bin/
 /composer.phar
-.puppet
 .vagrant
-Vagrantfile
