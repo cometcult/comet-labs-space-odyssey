@@ -33,6 +33,13 @@ class VolunteerController extends Controller
                 ->add('notice', sprintf('%s successfully volunteered!', $volunteer->getEmail()));
         }
 
+        $successRateCalculator = $this->get('the_comet_cult_odyssey.success_rate_calculator');
+        $successRate = $successRateCalculator->calculateSuccessRate();
+        $this
+            ->get('session')
+            ->getFlashBag()
+            ->add('notice', sprintf('Our success rate is %s%%', $successRate));
+
         return $this->render('TheCometCultOdysseyBundle:Volunteer:home.html.twig', array('form' => $form->createView()));
     }
 }

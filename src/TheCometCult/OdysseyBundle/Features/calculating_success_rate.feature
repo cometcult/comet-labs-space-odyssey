@@ -3,20 +3,20 @@ Feature: Calculating success rate
     As Mars Travel Agency
     I want to know current success rate
 
-    @wip
     Scenario: Mission landed success rate update
-        Given success rate is "100%"
-        And there are 1 logs "landed"
-        And there are 0 logs "crashed"
-        When mission has finished
-        And status report "landed" is logged
-        Then success rate is not updated
+        Given there are 1 logs "mission landed"
+        And there are 0 logs "mission crashed"
+        When I am on homepage
+        Then I should see "Our success rate is 100%"
 
-    @wip
     Scenario: Mission crashed success rate update
-        Given success rate is "100%"
-        And there are 1 logs "landed"
-        And there are 0 logs "crashed"
-        When mission has finished
-        And status report "crashed" is logged
-        Then success rate is updated with "50%"
+        Given there are 1 logs "mission landed"
+        And there are 1 logs "mission crashed"
+        When I am on homepage
+        Then I should see "Our success rate is 50%"
+
+    Scenario: Success rate when no missions finished
+        Given there are 0 logs "mission landed"
+        And there are 0 logs "mission crashed"
+        When I am on homepage
+        Then I should see "Our success rate is 0%"

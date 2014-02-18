@@ -39,6 +39,23 @@ class LogContext extends BehatContext
         }
     }
 
+    /**
+     * @Given /^there are (\d+) logs "([^"]*)"$/
+     */
+    public function thereAreLogs($number, $logStatus)
+    {
+        if (!in_array($logStatus, array(Log::MISSION_LANDED, Log::MISSION_CRASHED))) {
+            throw new BehaviorException(sprintf('Invalid log status: %s', $logStatus));
+        }
+        $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
+        for ($i=0; $i < $number; $i++) {
+            $log = new Log();
+            $log->setStatus($logStatus);
+            $dm->persist($log);
+        }
+        $dm->flush();
+    }
+
     protected function getContainer()
     {
         return $this->getMainContext()->getContainer();

@@ -5,7 +5,7 @@ namespace TheCometCult\OdysseyBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="TheCometCult\OdysseyBundle\Repository\LogRepository")
  */
 class Log
 {
