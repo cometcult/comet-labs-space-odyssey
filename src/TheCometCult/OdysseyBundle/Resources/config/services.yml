@@ -17,6 +17,15 @@ services:
         factory_method: getRepository
         arguments:
             - "TheCometCultOdysseyBundle:Volunteer"
+    the_comet_cult_odyssey.log_repository:
+        class: TheCometCult\OdysseyBundle\Repository\LogRepository
+        factory_service: doctrine_mongodb
+        factory_method: getRepository
+        arguments:
+            - "TheCometCultOdysseyBundle:Log"
+    the_comet_cult_odyssey.success_rate_calculator:
+        class: TheCometCult\OdysseyBundle\Calculator\SuccessRateCalculator
+        arguments: ["@the_comet_cult_odyssey.log_repository"]
     the_comet_cult_odyssey.crew_manager:
         class: TheCometCult\OdysseyBundle\Manager\CrewManager
         arguments: ["@the_comet_cult_odyssey.document_manager", "@the_comet_cult_odyssey.volunteer_repository", "%the_comet_cult_odyssey.crew_size%", "@event_dispatcher"]
