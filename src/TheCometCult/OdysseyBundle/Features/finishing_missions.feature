@@ -1,5 +1,5 @@
 Feature: Finishing missions
-    In to analize misson success
+    In order to analize misson success
     As Mars Travel Agency
     I want to conclude missions to mars
 
