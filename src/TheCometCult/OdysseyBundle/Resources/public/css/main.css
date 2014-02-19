@@ -1,0 +1,150 @@
+@font-face {
+    font-family: 'rabioheadregular';
+    src: url('fonts/rabiohead-webfont.eot');
+    src: url('fonts/rabiohead-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/rabiohead-webfont.woff') format('woff'),
+         url('fonts/rabiohead-webfont.ttf') format('truetype'),
+         url('fonts/rabiohead-webfont.svg#rabioheadregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Conv_CabinSketch-Bold';
+    src: url('fonts/CabinSketch-Bold.eot');
+    src: local('☺'),
+         url('fonts/CabinSketch-Bold.woff') format('woff'),
+         url('fonts/CabinSketch-Bold.ttf') format('truetype'),
+         url('fonts/CabinSketch-Bold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Conv_CabinSketch-Regular';
+    src: url('fonts/CabinSketch-Regular.eot');
+    src: local('☺'), url('fonts/CabinSketch-Regular.woff') format('woff'), url('fonts/CabinSketch-Regular.ttf') format('truetype'), url('fonts/CabinSketch-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html {
+    height: 100%;
+}
+
+body {
+    background: url(images/bg-body.jpg) 50% 50% / cover no-repeat #212121;
+    color: #cccccc;
+    font-family: rabioheadregular;
+    font-size: 10px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+    height: 100%;
+}
+
+main {
+    width: 720px;
+    margin: 0 auto;
+    background: url(images/bg1.png) no-repeat 0% 50%;
+    min-height: 500px;
+    padding-top: 100px;
+    position: relative;
+}
+
+.success-rate {
+    width: 720px;
+    bottom: 10px;
+    position: absolute;
+    margin-left: 50px;
+}
+
+.success-rate p {
+    font-size: 15px;
+}
+
+h1 {
+    font-family: 'Conv_CabinSketch-Bold';
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 6em;
+    margin-bottom: .5em;
+    line-height: 0.9333333333;
+}
+
+form.signup {
+    width: 50%;
+    margin-left: 50%;
+}
+
+input, form.signup p, label {
+    width: 100%;
+    font-size: 3em;
+    color: #cccccc;
+}
+
+p {
+    line-height: 0.8;
+}
+
+input {
+    background: #000;
+    border: none;
+    outline: none;
+    color: #cccccc;
+    background: url(images/inputbg.png) 50% 100% / 100% 4px no-repeat,
+                url(images/bullet-light.png) 100% 50% / auto no-repeat;
+    height: 60px;
+}
+
+input:focus {
+        background: url(images/inputbg.png) 50% 100% / 100% 4px no-repeat,
+                    url(images/bullet.png) 100% 50% / auto no-repeat;
+}
+
+input:after {
+    content: '>';
+    display: block;
+    float: right;
+    color: white;
+}
+
+::-webkit-input-placeholder {
+    color: #818181;
+}
+:-moz-placeholder {
+    color: #818181;
+}
+::-moz-placeholder {
+    color: #818181;
+}
+:-ms-input-placeholder {
+    color: #818181;
+}
+
+label {
+    line-height: 1;
+}
+
+label.error {
+    color: #fb3c3c;
+}
+
+label.notice {
+    color: #008000;
+}
+
+label.error::before {
+    content: '';
+    width: 8px;
+    height: 24px;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: -4px;
+    background: url(images/error-arrow.png);
+}
+
+.hidden {
+    display: none;
+}

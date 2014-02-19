@@ -38,7 +38,7 @@ class VolunteerController extends Controller
         $this
             ->get('session')
             ->getFlashBag()
-            ->add('notice', sprintf('Our success rate is %s%%', $successRate));
+            ->add('success-rate', sprintf('Our success rate is %s%%', $successRate));
 
         return $this->render('TheCometCultOdysseyBundle:Volunteer:home.html.twig', array('form' => $form->createView()));
     }
