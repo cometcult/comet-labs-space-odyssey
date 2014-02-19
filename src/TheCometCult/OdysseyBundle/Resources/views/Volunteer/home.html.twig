@@ -1,6 +1,26 @@
-{% for flashMessage in app.session.flashbag.get('notice') %}
-    <div class="flash-notice">
-        {{ flashMessage }}
+{% form_theme form 'TheCometCultOdysseyBundle:Volunteer:field_errors.html.twig' %}
+<!doctype html>
+<html lang="en">
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('bundles/thecometcultodyssey/css/normalize.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/thecometcultodyssey/css/main.css') }}" />
+{% endblock %}
+{% block body %}
+    <main role="main">
+            {{ form_start(form, {'attr':{'class': 'signup'}}) }}
+                <h1>We are all explorers</h1>
+                <p>We are looking for volunteers that will be willing to risk their lifes in a first human journey to Mars</p>
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <label for="email" class="notice">{{ flashMessage }}</label>
+                {% endfor %}
+                {{ form_widget(form.email, { 'attr': {'placeholder':'Enter your email...'}}) }}
+                {{ form_errors(form.email, { 'attr': {'class':'error'}}) }}
+            {{ form_end(form) }}
+    <div class="success-rate">
+        {% for flashMessage in app.session.flashbag.get('success-rate') %}
+            <p>* {{ flashMessage }}</p>
+        {% endfor %}
     </div>
-{% endfor %}
-{{ form(form) }}
+    </main>
+{% endblock %}
+</html>

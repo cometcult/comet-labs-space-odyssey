@@ -11,7 +11,7 @@ class VolunteerType extends AbstractType
     {
         $builder
             ->add('email', 'email')
-            ->add('save', 'submit');
+            ->add('save', 'submit', array('attr' => array('class' => 'hidden')));
     }
 
     public function getName()
