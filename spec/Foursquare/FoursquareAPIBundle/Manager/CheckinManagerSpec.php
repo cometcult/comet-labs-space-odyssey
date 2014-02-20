@@ -14,6 +14,6 @@ class CheckinManagerSpec extends ObjectBehavior
 
     function it_should_return_mars_checkins()
     {
-        $this->getMarsCheckins()->shouldReturn(array());
+        $this->getMarsCheckins()->shouldBeArray();
     }
 }
