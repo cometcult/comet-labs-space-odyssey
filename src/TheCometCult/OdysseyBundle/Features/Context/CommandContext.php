@@ -9,6 +9,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 use TheCometCult\OdysseyBundle\Command\StartMissionCommand;
+use TheCometCult\OdysseyBundle\Command\CheckMissionsStatusCommand;
 
 class CommandContext extends BehatContext
 {
@@ -18,6 +19,7 @@ class CommandContext extends BehatContext
     {
         $this->application = new Application($kernel);
         $this->application->add(new StartMissionCommand());
+        $this->application->add(new CheckMissionsStatusCommand());
     }
 
     /**
@@ -30,4 +32,13 @@ class CommandContext extends BehatContext
         $this->tester->execute(array('command' => $command->getName()));
     }
 
+    /**
+     * @When /^mission status is checked$/
+     */
+    public function missionStatusIsUpdated()
+    {
+        $command = $this->application->find('thecometcult:check-missions-status');
+        $this->tester = new CommandTester($command);
+        $this->tester->execute(array('command' => $command->getName()));
+    }
 }

@@ -85,19 +85,6 @@ class MissionContext extends BehatContext
     }
 
     /**
-     * @When /^mission status is checked$/
-     */
-    public function missionStatusIsUpdated()
-    {
-        $missionManager = $this->getContainer()->get('the_comet_cult_odyssey.mission_manager');
-        $mission = $this->findOngoingMission();
-        if (empty($mission)) {
-            throw new BehaviorException('There are no ongoing missions');
-        }
-        $missionManager->updateMissionStatus($mission);
-    }
-
-    /**
      * @Then /^the mission should be finished$/
      */
     public function theMissionShouldBeFinished()
