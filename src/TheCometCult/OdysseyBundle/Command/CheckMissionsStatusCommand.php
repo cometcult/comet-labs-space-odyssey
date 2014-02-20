@@ -21,13 +21,15 @@ class CheckMissionsStatusCommand extends ContainerAwareCommand
     {
         $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
         $missions = $dm->createQueryBuilder('TheCometCultOdysseyBundle:Mission')
+            ->field('eta')->lte(new \DateTime())
             ->field('status')->equals(Mission::STATUS_MISSION_ONGOING)
             ->getQuery()
             ->execute();
 
         $missionManager = $this->getContainer()->get('the_comet_cult_odyssey.mission_manager');
         foreach ($missions as $mission) {
-            $missionManager->updateMissionStatus($mission);
+            $updatedMission = $missionManager->updateMissionStatus($mission);
+            $output->writeln(sprintf('Mission status is now: %s', $updatedMission->getStatus()));
         }
     }
 }

@@ -59,6 +59,6 @@ class TimeManager implements TimeManagerInterface
      */
     public function generateMissionEta()
     {
-        return time() + $this->missionEta;
+        return time() + $this->missionEta + $this->departureDelay;
     }
 }

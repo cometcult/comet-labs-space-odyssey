@@ -32,6 +32,11 @@ class StartMissionCommand extends ContainerAwareCommand
         $missionManager = $this->getContainer()->get('the_comet_cult_odyssey.mission_manager');
         foreach ($missions as $mission) {
             $missionManager->startMission($mission);
+            $output->writeln(sprintf(
+                'mission created at: %s and departed at: %s',
+                date('H:i:s', $mission->getCreatedAtTimestamp()),
+                date('H:i:s', $mission->getDepartedAtTimestamp())
+            ));
         }
     }
 }

@@ -29,6 +29,6 @@ class SuccessRateCalculator
         $landedMissions = $this->logRepository->countLandedMissions();
         $crashedMissions = $this->logRepository->countCrashedMissions();
 
-        return !empty($landedMissions) ? ($landedMissions * 100) / ($landedMissions + $crashedMissions) : $landedMissions;
+        return !empty($landedMissions) ? intval(($landedMissions * 100) / ($landedMissions + $crashedMissions)) : $landedMissions;
     }
 }

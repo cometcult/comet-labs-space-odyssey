@@ -40,6 +40,7 @@ class MissionContext extends BehatContext
         $readyToFlyCrew = $this->findReadyToFlyCrew();
 
         $mission = new Mission();
+        $mission->setCreatedAt(strtotime('-2 day'));
         $mission->setDepartedAt(strtotime('-1 day'));
         $mission->setCrew($readyToFlyCrew);
 
